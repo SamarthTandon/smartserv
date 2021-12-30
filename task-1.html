@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 15px;
+        }
+        body {
+            padding: 20px;
+        }
+        table {
+            border: 0.5px solid rgba(0,0,0, 0.3);
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            border: 0.5px solid rgba(0,0,0, 0.3);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(0,0,0, 0.1);
+        }
+        h3 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Populating data in Table format</h1>
+    <h3>Data sorted in descending order based on popularity</h3>
+    <div id="root">
+
+    </div>
+
+    <script>
+        // properties
+        /*
+        popularity
+        price
+        subcategory
+        title
+        */
+        const URL = 'https://s3.amazonaws.com/open-to-cors/assignment.json';
+        const fetchDataThroughAPI = (url) => {
+            fetch(url)
+            .then(response => response.json())
+            .then((data) => {
+                populateData(data);
+            });
+        }
+
+        
+        function sort_by_key(array, key)
+        {
+            return array.sort(function(a, b)
+            {
+            var x = a[key]; var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        }
+
+        const root = document.getElementById('root');
+
+        const populateData = (data) => {
+            let products = data.products;
+            let count = data.count;
+
+            let table = document.createElement('table');
+            let tr = document.createElement('tr')
+            let th = document.createElement('th')
+            th.innerText = 'S No.'
+            tr.appendChild(th)
+            th = document.createElement('th')
+            th.innerText = 'Title'
+            tr.appendChild(th)
+            th = document.createElement('th')
+            th.innerText = 'Popularity'
+            tr.appendChild(th)
+            th = document.createElement('th')
+            th.innerText = 'Price'
+            tr.appendChild(th)
+            th = document.createElement('th')
+            th.innerText = 'Sub-Category'
+            tr.appendChild(th)
+            
+            table.appendChild(tr)
+            root.appendChild(table)
+
+            let productsArray = [];
+            for (let key in products) {
+                productsArray.push(products[key]);
+            }
+            productsArray = productsArray.sort(function(a,b){ 
+                var x = parseInt(a.popularity) < parseInt(b.popularity) ? 1:-1; 
+                return x; 
+            });
+            console.log(productsArray);
+            for (let i=0; i<productsArray.length; i++) {
+                let tr = document.createElement('tr')
+                let td = document.createElement('td')
+                td.innerText = i + 1;
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = productsArray[i].title;
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = productsArray[i].popularity
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = productsArray[i].price
+                tr.appendChild(td)
+                td = document.createElement('td')
+                td.innerText = productsArray[i].subcategory
+                tr.appendChild(td)
+
+                table.appendChild(tr)
+            }
+        }
+
+
+        fetchDataThroughAPI(URL)
+    </script>
+</body>
+</html>

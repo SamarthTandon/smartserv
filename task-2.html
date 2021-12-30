@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI | API</title>
+
+<script src="https://kit.fontawesome.com/196c90f518.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .wrapper {
+            padding: 30px;
+        }
+        .flex-row {
+            display: flex;
+        }
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .flex-1 {
+            flex: 1;
+        }
+        .wrapper > div > div {
+            background: white;
+            border-radius: 10px;
+            margin-left: 20px;
+            padding: 20px;
+        }
+
+        .wrapper > div > div:first-child {
+            margin-left: 0;
+        }
+
+        .wrapper > div > div > div > div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .space-between {
+            display: flex;
+            justify-content: space-between;
+        }
+        select {
+            width: 150px;
+            height: 40px;
+        }
+        #has-header {
+            margin-left: 50px;
+        }
+        #file {
+            margin-top: 20px;
+            display: none;
+        }
+        #upload-file-box {
+            margin-top: 10px;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px dotted rgba(14, 61, 170, 0.4);
+            padding: 30px;
+            border-radius: 5px;
+            flex-direction: column;
+            color: rgba(14, 61, 170);
+        }
+        #upload-file-box h3 {
+            font-size: 20px;
+        }
+        #display-handler-block {
+            background: white;
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        #display-handler-block > p {
+            margin: 10px 0px;
+        }
+        #display-handler-block button {
+            padding: 5px;  
+            border-radius: 3px;
+            border: 0.5px solid rgba(80, 84, 94, 0.4);
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0px 20px;
+        }
+        .btn-container > button:nth-child(2) {
+            margin-top: 50px;
+        }
+        .select-option-container, .selected-option-container {
+            border: 0.5px solid rgba(14, 61, 170, 0.4);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .select-option-container .select-option span {
+            display: block;
+            padding: 3px 5px;
+            border-radius: 3px;
+            margin: 2px 0px;
+        }
+        .select-option-container input:checked ~ span {
+            background: green;
+            color: white;
+            display: block;
+        }
+        
+        .select-option-container input {
+            display: none;
+        }
+        #selected-file-by-user {
+            font-size: 13px;
+            margin: 10px 0px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flex-row">
+            <div class="flex-1">
+                <div>
+                    <label>Select File</label>
+                    <input id="file" type="file" />
+                    <div id="upload-file-box">
+                        <label for="">
+                            <i class="fas fa-file-upload"></i>
+    </label>
+                    <h3>Upload File</h3>
+                    <div id="selected-file-by-user"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div>
+                    <label>Select Format</label>
+                    <div class="space-between">
+                        <label>File Type</label>
+                        <select id="file-type">
+                            <option value="">csv</option>
+                        </select>
+                    </div>
+                    <div class="space-between">
+                        <label>Character Encoding</label>
+                        <select id="character-encoding">
+                            <option value="">UTF-8</option>
+                        </select>
+                    </div>
+                    <div class="space-between">
+                        <label>Delimeter</label>
+                        <select id="delimeter">
+                            <option value="">comma</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Has Header</label>
+                        <input id="has-header" type="checkbox" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="display-handler-block">
+            <label >Display Handling</label>
+            <p>Select the fields to be displayed</p>
+            <div class="flex-row">
+                <div class="flex-1">Available Fields</div>
+                <div class="btn-container"></div>
+                <div class="flex-1" style="margin-left: 20px;">Fields to be Displayed</div>
+
+            </div>
+            <div class="flex-row">
+                <div class="flex-col flex-1 select-option-container">
+                    <label class="select-option">
+                        <input type="checkbox" value="productId">
+                        <span>Product Id</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="productId">
+                        <span>Subcategory</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="productId">
+                        <span>Title</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="Price">
+                        <span>Price</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="Popularity">
+                        <span>Popularity</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="Description">
+                        <span>Description</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="Rating">
+                        <span>Rating</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="UTM Source">
+                        <span>UTM Source</span>
+                    </label>
+                    <label class="select-option">
+                        <input type="checkbox" value="UTM Medium">
+                        <span>UTM Medium</span>
+                    </label>
+                </div>
+                <div class="flex-col btn-container">
+                    <button><i class="fas fa-angle-right"></i><i class="fas fa-angle-right"></i></button>
+                    <button><i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i></button>
+                </div>
+                <div class="flex-1 selected-option-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let uploadBox = document.getElementById('upload-file-box');
+        let chooseFile = document.getElementById('file');
+        uploadBox.addEventListener('click', () => {
+            chooseFile.click();
+        })
+
+        chooseFile.addEventListener('change', (e) => {
+            let file = e.target;
+            let fileName = file.files[0].name;
+            let response = document.getElementById('selected-file-by-user');
+            response.innerHTML = 'File Selected <br/>' + fileName;
+        })
+    </script>
+</body>
+</html>

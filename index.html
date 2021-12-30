@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .wrapper {
+            padding: 50px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .destination {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+        }
+        .destination > div {
+            padding: 10px;
+            border-radius: 10px;
+            background: white;
+            margin-bottom: 15px;
+        }
+        .destination  p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .link {
+            color: rgb(31, 67, 185);
+        }  
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 10px;
+
+        }
+        .button {
+            padding: 7px 15px;
+            background: linear-gradient(to right, rgb(31, 87, 179), rgb(21, 65, 146));
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: rgb(57, 68, 228);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Welcome to SMARTSERV Assessment</h1>
+        <div class="destination">
+            <div>
+                <h3>Task 1 | API</h3>
+                <p>Fetching API <a class="link" href="">https://s3.amazonaws.com/open-to-cors/assignment.json</a> and populating data in table format.
+                    <br />
+                    <br />
+                    Sorting data on popularity property
+                    </p>
+                <div class="button-container">
+                    <a class="button" href="task-1.html" target="_blank">View</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Task 2 | UI</h3>
+                <p>1. Upload file
+                    <br />
+                    2. Choose Format
+                    <br />
+                    3. Select Properties to display
+                </p>
+                <div class="button-container">
+                    <a class="button" href="task-2.html" target="_blank">View</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Task 3 | Login Form</h3>
+                <p>
+                    Login Form with E-mail and Password validation
+                    <br/>
+                    
+                </p>
+                <div class="button-container">
+                    <a class="button" href="task-3.html" target="_blank">View</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Task 4 | Dashboard</h3>
+                <p>Access Dashboard using password "SmartServTest@123"</p>
+                <div class="button-container">
+                    <a class="button" href="task-4.html" target="_blank">View</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

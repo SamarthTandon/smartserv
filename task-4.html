@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Trispace:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+
+            margin: 0%;
+            padding: 0%;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.9);
+            height: 100vh;
+            width: auto;
+            overflow: hidden;
+        }
+
+        .centre {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 350px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.95);
+            border-radius: 6px;
+            padding: 0%;
+            text-align: center;
+            padding: 30px 0px;
+        }
+
+        h1 {
+            margin: 40px;
+            text-align: center;
+        }
+
+        .txt_field {
+            margin-bottom: 10px;
+        }
+
+        .txt_field input {
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .txt_field input {
+            padding: 10px;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            height: 40px;
+        }
+        .forgot-password {
+            color: #999797;
+        }
+        .login-btn {
+            background-color: rgb(5, 161, 5);
+            width: 200px;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: white;
+            font-weight: 700;
+        }
+        form {
+            padding: 0px 30px;
+        }
+        .c-title {
+            color: white;
+        }
+        .smart {
+            color:rgb(10, 143, 27);
+        }
+        .serv {
+            position: relative;
+        }
+        .customized-e {
+            width: 16px;
+            height: 5px;
+            background: rgb(10, 143, 27);
+            position: absolute;
+            left: 18px;
+            top: 6px;
+        }
+        .customized-e-remove {
+            width: 7px;
+            height: 5px;
+            background: rgba(0,0,0,0.95);
+            position: absolute;
+            left: 18px;
+            top: 11px;
+        }
+        .form-response {
+            font-size: 13px;
+            text-align: left;
+        }
+        .form-response-error {
+            color: rgba(255, 0, 0, 0.7);
+        }
+        .form-response-success {
+            color : rgba(0, 255, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centre">
+        <div class="img">
+            <img src="" alt="">
+        </div>
+        <h1 class="c-title">
+            <label class="smart">SMART</label>
+            <span class="serv">
+                SERV
+                <div class="customized-e"></div>
+                <div class="customized-e-remove"></div>
+            </span>
+        </h1>
+        <form id="login-form" method="post">
+            <div class="txt_field">
+                <input id="username" type="email" placeholder="username">
+                <div class="form-response">Invalid Username</div>
+            </div>
+            <div class="txt_field">
+                <input id="password" type="password" placeholder="password">
+                <div class="form-response">Password must contain capital letter number and a special symbol</div>
+            </div>
+            <div class="txt_field">
+                <input class="login-btn" type="submit" value="Login">
+            </div>
+            <div class="pass" style="margin-top: 20px;font-size: 12px;text-decoration: underline;"><a  class="forgot-password" href="#"
+                    > Forgot your password?</a></div>
+        </form>
+    </div>
+
+
+
+    <script>
+        let form = document.getElementById('login-form');
+
+        var usernameREGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                
+        var passwordREGEX = /^(?=.*[0-9])(?=.*[@])[a-zA-Z0-9@]{6,30}$/;
+        
+        const validateEmail = (email) => {
+            return email.match(usernameREGEX);
+        };
+
+        const validatePassword = (password) => {
+            return password.match(passwordREGEX);
+        }
+
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let response = document.getElementsByClassName('form-response')
+            let usernameResponse = response[0]
+            let passwordResponse = response[1]
+
+            let control = true;
+
+            if(password == 'SmartServTest@123') {
+                location.href = 'dashboard.html'
+            }
+
+            if(username != '') { // username not empty
+                if(validateEmail(username)) {
+                    usernameResponse.innerText = 'Valid Username'
+                    usernameResponse.classList.add('form-response-success')
+                    usernameResponse.classList.remove('form-response-error')
+                    
+                }
+                else {
+                    usernameResponse.innerText = 'Invlaid Username'
+                    usernameResponse.classList.remove('form-response-success')
+                    usernameResponse.classList.add('form-response-error')
+                    control = false;
+                }
+            }
+            else { // username empty
+                usernameResponse.innerText = 'Username required'
+                usernameResponse.classList.remove('form-response-success')
+                usernameResponse.classList.add('form-response-error')
+                control = false;
+            }
+
+
+            if(password != '') { // password not empty
+                if(validatePassword(password)) {
+                    passwordResponse.innerText = 'Valid Password'
+                    passwordResponse.classList.add('form-response-success')
+                    passwordResponse.classList.remove('form-response-error')
+                    
+                }
+                else {
+                    passwordResponse.innerText = 'Invlaid Password'
+                    passwordResponse.classList.remove('form-response-success')
+                    passwordResponse.classList.add('form-response-error')
+                    control = false;
+                }
+            }
+            else { // password empty
+                passwordResponse.innerText = 'Password required'
+                passwordResponse.classList.remove('form-response-success')
+                passwordResponse.classList.add('form-response-error')
+                control = false;
+            }
+
+            if(control) { // everything is ok
+                console.log('form submitted successfully')
+                //form.submit();
+            }
+
+            console.log(username);
+            console.log(password);
+        }
+    </script>
+</body>
+
+</html>

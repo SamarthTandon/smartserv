@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Highcharts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        h3 {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        .wrapper {
+            padding: 20px;
+        }
+        .flex-row {
+            display: flex;
+        }
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .flex-1 {
+            flex: 1;
+        }
+        .part-1 {
+            margin-top: 10px;
+        }
+        .part-1 > div {
+            margin-left: 15px;
+            height: 150px;
+        }
+        .part-1 > div:first-child {
+            margin-left: 0;
+        }
+        .part-1 > div > div {
+            padding: 7px 10px;
+            height: 50%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: white;
+            margin-bottom: 10px;
+            border-left: 7px solid rgb(23, 161, 120);
+            box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .part-1 > div > div > label:nth-child(2) {
+            font-size: 13px;
+        }
+
+        .part-2 {
+            margin-top: 15px;
+        }
+        .part-2 > div > div {
+            background: white;
+            height: 300px;
+            box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.2);
+        }
+        .part-2 > div {
+            margin-left: 20px;
+        }
+        .part-2 > div:first-child {
+            margin-left: 0px;
+        }
+        .part-2 > div > div:first-child {
+            margin-left: 0px;
+        }
+
+        .heading-1 {
+            margin-bottom: 15px;
+        }
+        .heading-2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .success {
+            color: rgb(23, 161, 120);
+        }
+        .error {
+            color: rgba(255, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h3 class="heading-1">Company Metrics</h3>
+        <div class="flex-row part-1">
+            <div class="flex-col flex-1">
+                <div class="flex-col">
+                    <label class="success">$406,411.29</label>
+                    <label>Total Revenue</label>
+                </div>
+                <div class="flex-col">
+                    <label class="error">$110,448.8</label>
+                    <label>Outstanding Amount</label>
+                </div>
+            </div>
+            <div class="flex-col flex-1">
+                <div class="flex-col">
+                    <label>$620</label>
+                    <label>Total Jobss Avg</label>
+                </div>
+                <div class="flex-col">
+                    <label>105</label>Membership Sold</label>
+                </div>
+            </div>
+            <div class="flex-col flex-1">
+                <div class="flex-col">
+                    <label>655</label>
+                    <label>Ticket Created</label>
+                </div>
+                <div class="flex-col">
+                    <label>436</label>
+                    <label>Job Completed</label>
+                </div>
+            </div>
+            <div class="flex-col flex-1">
+                <div class="flex-col">
+                    <label>735</label>
+                    <label>Tickets Scheduled</label>
+                </div>
+                <div class="flex-col">
+                    <label>65</label>
+                    <label>Total Canceled</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-row part-2">
+            <div class="flex-1">
+                <h3 class="heading-2">Revenue By Job Location</h3>
+                <div id="graph-1" ></div>
+            </div>
+            <div class="flex-1">
+                <h3 class="heading-2">Revenue By Job Location</h3>
+                <div id="graph-2" ></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        Highcharts.chart('graph-1', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Everett', 'Seattle', 'Lynnwood', 'Bothell', 'Mukilteo', 'Edmonds'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Revenue for November 2019',
+                    align: 'middle'
+                },
+                labels: {
+                    overflow: 'justify',
+                    rotation: 45
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true,
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Year 2000',
+                data: [90000, 85000, 48000, 40000, 30000, 27000],
+                color: 'rgb(23, 161, 120)'
+            }]
+        });
+        Highcharts.chart('graph-2', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Service Plumbing', 'Bid Work HVAC', 'Service HVAC', 'Bid Work Plumbing', 'HWT Replacement', 'Maintenance', 'Material Sale'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Revenue for November 2019',
+                    align: 'middle'
+                },
+                labels: {
+                    overflow: 'justify',
+                    rotation: 45
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true,
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Year 2019',
+                data: [160000, 120000, 80000, 75000, 50000, 35000, 5000],
+                color: 'rgb(23, 161, 120)'
+            }]
+        });
+    </script>
+</body>
+</html>
